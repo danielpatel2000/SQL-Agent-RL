@@ -1,0 +1,45 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sql-agent-rl"
+version = "0.1.0"
+description = "An RL environment for multi-turn SQL analytics agents over the Chinook database, with a reward rubric designed against reward hacking."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "Daniel Patel" }]
+keywords = ["rl", "llm", "sql", "verifiers", "environments", "reward-modeling"]
+classifiers = [
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Intended Audience :: Science/Research",
+]
+dependencies = [
+    "pandas>=2.0",
+]
+
+[project.optional-dependencies]
+# The verifiers integration is optional so the environment, sandbox and rubric
+# stay usable (and testable) without any RL framework installed.
+verifiers = ["verifiers>=0.3.1,<0.4"]
+eval = ["verifiers>=0.3.1,<0.4", "openai>=1.40"]
+dev = [
+    "pytest>=8.0",
+    "verifiers>=0.3.1,<0.4",
+    "openai>=1.40",
+]
+
+[project.scripts]
+chinook-download = "sql_agent_rl.data.download_chinook:main"
+
+[project.urls]
+Homepage = "https://github.com/danielpatel2000/SQL-Agent-RL"
+
+[tool.setuptools.packages.find]
+include = ["sql_agent_rl*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+filterwarnings = ["error::DeprecationWarning:sql_agent_rl.*"]

@@ -1,0 +1,17 @@
+# The Chinook database is a downloaded artifact, not source.
+# Fetch it with: python data/download_chinook.py
+data/*.db
+data/*.sqlite
+
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+.ruff_cache/
+.env
+
+# eval run outputs
+eval/runs/
